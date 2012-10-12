@@ -2,13 +2,29 @@
 
 TextInput::TextInput()
 {
-    this->rect = sf::Shape::Rectangle(0,0,100,20,sf::Color::White,1,sf::Color::White);
 }
 
 TextInput::TextInput(const TextInput& orig)
 {
 }
 
+TextInput::TextInput(sf::Vector2f size, sf::Color color, int border_size, sf::Color border_color)
+: Widget(size, color, border_size, border_color)
+{
+    
+}
+
+TextInput::TextInput(sf::Vector2f size, sf::Color color, int border_size)
+: Widget(size, color, border_size)
+{
+    
+}
+
 TextInput::~TextInput()
 {
+}
+
+std::string TextInput::getName()
+{
+    return this->name;
 }

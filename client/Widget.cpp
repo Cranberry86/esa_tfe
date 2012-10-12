@@ -6,6 +6,16 @@ Widget::Widget()
 {
 }
 
+Widget::Widget(sf::Vector2f size, sf::Color color, int border_size, sf::Color border_color)
+{
+    this->rect = sf::Shape::Rectangle(0, 0, size.x, size.y, color, border_size, border_color);
+}
+
+Widget::Widget(sf::Vector2f size, sf::Color color, int border_size)
+{
+    this->rect = sf::Shape::Rectangle(0, 0, size.x, size.y, color, border_size);
+}
+
 Widget::Widget(const Widget& orig)
 {
 }
@@ -14,12 +24,12 @@ Widget::~Widget()
 {
 }
 
-void Widget::setPosition(sf::Vector2f position)
+void Widget::setName(const std::string& name)
 {
-    this->rect.SetPosition(position);
+    this->name = name;
 }
 
-void Widget::display(sf::RenderWindow& window)
+std::string Widget::getName()
 {
-    window.Draw(this->rect);
+    return this->name;
 }
