@@ -19,23 +19,23 @@ int main(int argc, char** argv)
     UDPNetwork network;
     network.launch();
     
-//    SQLManager sql_manager;
-//    sql_manager.launch();
+    SQLManager sql_manager;
+    sql_manager.launch();
 //    std::map<std::string, std::string> datas = sql_manager.getData(2, "test");
-    
+//    
 //    std::map<std::string, std::string>::iterator it;
 //    for(it = datas.begin(); it != datas.end(); ++it)
 //    {
 //        std::cout << it->second << std::endl;
 //    }
     
-//    sql_manager.saveData(6, "Plumes d'autruche", "test");
+    sql_manager.saveData(91, "Plumes de paon", "test");
     
-    ThreadManager thread;
-    thread.Launch();
-    
-    for (int i = 0; i < 1000; ++i)
-        std::cout << "I'm the main thread" << std::endl;
+//    ThreadManager thread;
+//    thread.Launch();
+//    
+//    for (int i = 0; i < 1000; ++i)
+//        std::cout << "I'm the main thread" << std::endl;
     
 //    std::vector< std::map< std::string, std::string> > datas = sql_manager.getAllData("test");
 //    std::vector< std::map< std::string, std::string> >::iterator it;
