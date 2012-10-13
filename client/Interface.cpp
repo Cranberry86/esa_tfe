@@ -33,6 +33,8 @@ void Interface::displayWidgets(sf::RenderWindow* window)
     {
         window->Draw(*it->second);
     }
+    this->bg.setSpriteFromImage();
+    window->Draw(this->bg);
 }
 
 void Interface::addButton(Button& btn)
@@ -47,8 +49,7 @@ void Interface::addTextInput(TextInput& input)
     this->widgets[input.getName()] = &this->textinputs[input.getName()];
 }
 
-void Interface::addBackgrounds(BackgroundImage& bg)
+void Interface::addBackground(BackgroundImage& bg)
 {
-    this->backgrounds[bg.getName()] = bg;
     this->bg = bg;
 }

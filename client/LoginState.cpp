@@ -23,6 +23,9 @@ void LoginState::init()
     interface.addTextInput(input_login);
     interface.addTextInput(input_pwd);
     interface.addButton(btn_ok);
+    
+    BackgroundImage bg("/home/cranberry/www/esa_tfe/client/images/bg2.jpg");
+    interface.addBackground(bg);
 }
 
 void LoginState::draw(sf::RenderWindow* window)

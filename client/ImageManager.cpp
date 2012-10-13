@@ -40,9 +40,7 @@ sf::Image& ImageManager::getImage(const std::string& filename)
         {
             return it->second;
         }
-        std::cout << "im::getimage" << filename << std::endl;
     }
-    
     this->loadImage(filename);
     return this->images[filename];
 }

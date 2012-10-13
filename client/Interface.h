@@ -21,18 +21,15 @@ public:
     Interface(const Interface& orig);
     virtual ~Interface();
     void init();
-//    void addWidget(Widget* widget);
-//    void displayWidgets(sf::RenderWindow* window);
     void addWidget(Widget& widget);
     void displayWidgets(sf::RenderWindow* window);
     void addBg(BackgroundImage bg);
     void displayBg(sf::RenderWindow* window);
     void addButton(Button& btn);
     void addTextInput(TextInput& ti);
-    void addBackgrounds(BackgroundImage& bg);
+    void addBackground(BackgroundImage& bg);
 private:    
     BackgroundImage bg;
-//    std::map<std::string, Widget> widgets;
     std::map<std::string, TextInput> textinputs;
     std::map<std::string, Button> buttons;
     std::map<std::string, BackgroundImage> backgrounds;
