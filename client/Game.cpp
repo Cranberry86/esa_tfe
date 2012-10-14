@@ -8,6 +8,8 @@
 #include <SFML/Window/Window.hpp>
 
 #include "Game.h"
+#include "GameState.h"
+//class GameState;
 
 Game::Game()
 {
@@ -52,8 +54,23 @@ bool Game::isRunning()
 
 void Game::draw()
 {
-//    std::cout << "game::draw" << std::endl;
     this->window.Clear(sf::Color::White);
     this->states.back()->draw(&this->window);
     this->window.Display();
+}
+
+void Game::handleEvents()
+{
+    this->states.back()->handleEvents(this);
+}
+
+void Game::quit()
+{
+    this->running = false;
+    this->window.Close();
+}
+
+sf::RenderWindow* Game::getWindow()
+{
+    return &this->window;
 }

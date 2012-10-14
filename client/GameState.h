@@ -10,10 +10,13 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "Game.h"
+
 class GameState {
 public:
     virtual void draw(sf::RenderWindow* window) = 0;
     virtual void init() = 0;
+    virtual void handleEvents(Game* game) = 0;
 private:
 
 };

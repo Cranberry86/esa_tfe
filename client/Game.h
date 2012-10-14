@@ -8,10 +8,11 @@
 #ifndef GAME_H
 #define	GAME_H
 
-#include "GameState.h"
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <iostream>
+
+class GameState;
 
 class Game {
 public:
@@ -25,6 +26,9 @@ public:
     void popState();
     bool isRunning();
     void draw();
+    void handleEvents();
+    void quit();
+    sf::RenderWindow* getWindow();
 private:
     std::vector<GameState*> states;
     sf::RenderWindow window;

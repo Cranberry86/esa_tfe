@@ -32,3 +32,20 @@ void LoginState::draw(sf::RenderWindow* window)
 {
     this->interface.displayWidgets(window);
 }
+
+void LoginState::handleEvents(Game* game)
+{
+    sf::RenderWindow* window = game->getWindow();
+    sf::Event event;
+    while(window->GetEvent(event))
+    {
+        switch(event.Type)
+        {
+            case sf::Event::Closed:
+                game->quit();
+                break;
+            default:
+                break;
+        }
+    }
+}

@@ -21,6 +21,7 @@ class LoginState : public GameState {
 public:
     void init();
     void draw(sf::RenderWindow* window);
+    void handleEvents(Game* game);
 private:
     Interface interface;
     sf::RenderWindow* window;
