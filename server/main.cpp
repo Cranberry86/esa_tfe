@@ -29,7 +29,7 @@ int main(int argc, char** argv)
 //        std::cout << it->second << std::endl;
 //    }
     
-    sql_manager.saveData(91, "Plumes de paon", "test");
+//    sql_manager.saveData(91, "Plumes de paon", "test");
     
 //    ThreadManager thread;
 //    thread.Launch();
@@ -66,6 +66,7 @@ int main(int argc, char** argv)
             }
         }
         network.receiveData();
+        network.managePackets();
     }
     
     return 0;

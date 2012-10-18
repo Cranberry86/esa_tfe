@@ -4,6 +4,7 @@
 
 UDPNetwork::UDPNetwork()
 {
+    this->awaiting_answer = false;
 }
 
 UDPNetwork::UDPNetwork(const UDPNetwork& orig)
@@ -40,9 +41,11 @@ void UDPNetwork::launch()
         std::string ip = cfg.lookup("client_configuration.connection.ip").c_str();
         int port = cfg.lookup("client_configuration.connection.port");
 
-        this->port = port;
+        this->client_port = port;
         this->server_address = ip;
-        std::cout << "CLIENT UDPNetwork::launch" << std::endl;
+        
+        if(this->socket.Bind(this->client_port))
+            return;
     }
     catch(const libconfig::SettingNotFoundException &nfex)
     {
@@ -53,11 +56,40 @@ void UDPNetwork::launch()
 
 void UDPNetwork::sendData()
 {
-    std::cout << "CLIENT UDPNetwork::sendData" << std::endl;
-    char msg[] = "Je suis un client !";
-
-    if (this->socket.Send(msg, sizeof (msg), this->server_address, this->port) != sf::Socket::Done)
+    sf::Packet packet;
+    std::string login = "Cranberry";
+    std::string pwd = "password";
+    sf::Int8 packet_type = 1;
+    
+    packet << packet_type << login << pwd;
+    
+    if (this->socket.Send(packet, this->server_address, 4343) != sf::Socket::Done)
         return;
+    
+    this->awaiting_answer = true;
+}
 
-    std::cout << "Message sent !" << std::endl;
+void UDPNetwork::receiveData()
+{
+    sf::IPAddress server_address;
+    unsigned short server_port;
+    
+    sf::Packet packet;
+    std::string msg;
+//    std::string pwd;
+//    sf::Int8 packet_type;
+    
+    if(this->socket.Receive(packet, server_address, server_port) != sf::Socket::Done)
+        return;
+    
+    this->awaiting_answer = false;
+    
+    packet >> msg;
+    
+    std::cout << "CLIENT UDPNetwork::receiveDATA  :  " << msg << std::endl;
+}
+
+bool UDPNetwork::isAwaitingAnswer()
+{
+    return this->awaiting_answer;
 }

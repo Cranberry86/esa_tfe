@@ -34,10 +34,9 @@ void UDPNetwork::launch()
     try
     {
         int port = cfg.lookup("server_configuration.connection.port");
-        this->port = port;
+        this->server_port = port;
 
-        std::cout << "SERVER UDPNetwork::launch" << std::endl;
-        if(this->socket.Bind(port))
+        if(this->socket.Bind(this->server_port))
             return;
     }
     catch(const libconfig::SettingNotFoundException &nfex)
@@ -55,28 +54,46 @@ void UDPNetwork::receiveData()
     char msg[128];
     std::size_t received;
     
-    if(this->socket.Receive(msg, sizeof(msg), received, client_address, client_port) != sf::Socket::Done)
-        return;
+    sf::Packet packet;
+//    std::string login;
+//    std::string pwd;
+//    sf::Int8 packet_type;
     
-    this->addClient(client_address);
-    
-    std::cout << "Message received : " << msg << std::endl;
-}
-
-void UDPNetwork::addClient(sf::IPAddress ipaddress)
-{
-    bool can_add = true;
-    for(std::vector<sf::IPAddress>::iterator it = this->clients_addresses.begin(); it != this->clients_addresses.end(); ++it)
+    if(this->socket.Receive(packet, client_address, client_port) != sf::Socket::Done)
     {
-        if(*it == ipaddress)
-        {
-            can_add = false;
-        }
-        std::cout << *it << std::endl;
+        std::cout << "SERVER UDPNetwork::receiveDATA ERROR" << std::endl;
+        return;
     }
     
-    if(can_add == true)
+//    packet >> packet_type >> login >> pwd;
+//    packet >> packet_type;
+    
+    this->addClient(client_address, client_port);
+    this->messages[client_address] = packet;
+}
+
+void UDPNetwork::addClient(sf::IPAddress ipaddress, unsigned short port)
+{
+    this->clients[ipaddress] = port;
+}
+
+void UDPNetwork::managePackets()
+{
+    std::cout << "SERVER UDPNetwork::MANAGE PACKET" << std::endl;
+    for(std::map<sf::IPAddress, sf::Packet>::iterator it = this->messages.begin(); it != this->messages.end(); ++it)
     {
-        this->clients_addresses.push_back(ipaddress);
+        sf::Packet packet;
+        std::string msg = "OKAY";
+        packet << msg;
+        sendData(it->first, packet);
+        this->messages.erase(it);
+    }
+}
+
+void UDPNetwork::sendData(sf::IPAddress address, sf::Packet packet)
+{
+    if (this->socket.Send(packet, address, this->clients[address]) != sf::Socket::Done)
+    {
+        return;
     }
 }

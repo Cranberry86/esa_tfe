@@ -12,10 +12,12 @@ public:
     void sendData();
     void receiveData();
     void launch();
+    bool isAwaitingAnswer();
 private:
     sf::SocketUDP socket;
-    unsigned int port;
+    unsigned int client_port;
     sf::IPAddress server_address;
+    bool awaiting_answer;
 };
 
 #endif	/* UDPNETWORK_H */
