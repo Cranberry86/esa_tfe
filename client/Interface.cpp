@@ -19,7 +19,6 @@ Interface::Interface(const Interface& orig)
 
 Interface::~Interface()
 {
-    
 }
 
 void Interface::init()
@@ -33,23 +32,43 @@ void Interface::displayWidgets(sf::RenderWindow* window)
     {
         window->Draw(*it->second);
     }
-    this->bg.setSpriteFromImage();
     window->Draw(this->bg);
 }
 
-void Interface::addButton(Button& btn)
+void Interface::registerButton(Button& btn)
 {
     this->buttons[btn.getName()] = btn;
     this->widgets[btn.getName()] = &this->buttons[btn.getName()];
 }
 
-void Interface::addTextInput(TextInput& input)
+void Interface::registerTextInput(TextInput& input)
 {
     this->textinputs[input.getName()] = input;
     this->widgets[input.getName()] = &this->textinputs[input.getName()];
 }
 
-void Interface::addBackground(BackgroundImage& bg)
+void Interface::addBackground(std::string filename)
 {
+    BackgroundImage bg(filename);
     this->bg = bg;
+    this->bg.setSpriteFromImage();
+}
+
+void Interface::addButton(std::string name, sf::Vector2f size, sf::Color back, int border_size, sf::Color border)
+{
+    Button btn(size, back, border_size, border);
+    btn.setName(name);
+    registerButton(btn);
+}
+
+void Interface::addTextInput(std::string name, sf::Vector2f size, sf::Color back, int border_size, sf::Color border)
+{
+    TextInput ti(size, back, border_size, border);
+    ti.setName(name);
+    registerTextInput(ti);
+}
+
+Widget* Interface::getWidget(std::string name)
+{
+    return this->widgets[name];
 }

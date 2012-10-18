@@ -25,10 +25,14 @@ public:
     void displayWidgets(sf::RenderWindow* window);
     void addBg(BackgroundImage bg);
     void displayBg(sf::RenderWindow* window);
-    void addButton(Button& btn);
-    void addTextInput(TextInput& ti);
-    void addBackground(BackgroundImage& bg);
-private:    
+    void addBackground(std::string filename);
+    void addButton(std::string name, sf::Vector2f size, sf::Color back, int border_size, sf::Color border);
+    void addTextInput(std::string name, sf::Vector2f size, sf::Color back, int border_size, sf::Color border);
+    Widget* getWidget(std::string name);
+private:
+    void registerButton(Button& btn);
+    void registerTextInput(TextInput& ti);
+    
     BackgroundImage bg;
     std::map<std::string, TextInput> textinputs;
     std::map<std::string, Button> buttons;

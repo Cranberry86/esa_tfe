@@ -18,7 +18,6 @@ public:
     Button(sf::Vector2f size, sf::Color color, int border_size);
     Button(const Button& orig);
     virtual ~Button();
-    std::string getName();
 private:
     void Render(sf::RenderTarget& Target) const
     {

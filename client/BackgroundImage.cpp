@@ -11,9 +11,8 @@ BackgroundImage::BackgroundImage()
 {
 }
 
-BackgroundImage::BackgroundImage(const BackgroundImage& orig):image(orig.image)
+BackgroundImage::BackgroundImage(const BackgroundImage& orig)
 {
-    this->SetImage(image);
 }
 
 BackgroundImage::~BackgroundImage()
@@ -26,6 +25,7 @@ BackgroundImage::BackgroundImage(const std::string& filename)
     {
         std::cout << "Erreur lors du chargement de l'image du Player." << std::endl;
     }
+    this->SetImage(image);
 }
 
 void BackgroundImage::setSpriteFromImage()

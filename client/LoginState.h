@@ -10,8 +10,6 @@
 
 #include "GameState.h"
 #include "Interface.h"
-#include "TextInput.h"
-#include "Button.h"
 #include "ImageManager.h"
 #include "BackgroundImage.h"
 #include <iostream>
@@ -19,12 +17,13 @@
 
 class LoginState : public GameState {
 public:
-    void init();
+    void init(UDPNetwork* network);
     void draw(sf::RenderWindow* window);
     void handleEvents(Game* game);
 private:
     Interface interface;
     sf::RenderWindow* window;
+    UDPNetwork* network;
 };
 
 #endif	/* LOGINSTATE_H */

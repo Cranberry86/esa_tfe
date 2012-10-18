@@ -30,8 +30,3 @@ Button::Button(const Button& orig)
 Button::~Button()
 {
 }
-
-std::string Button::getName()
-{
-    return this->name;
-}

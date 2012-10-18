@@ -28,6 +28,7 @@ void Game::init(int width, int height, std::string title)
     this->window.Create(sf::VideoMode(width, height, 32), title);
     this->window.SetFramerateLimit(60);
     this->running = true;
+    network.launch();
 }
 
 void Game::changeState(GameState* state)
@@ -44,7 +45,8 @@ void Game::pushShate(GameState* state)
 {
     std::cout << "game::pushstate" << std::endl;
     this->states.push_back(state);
-    this->states.back()->init();
+    this->states.back()->init(&this->network);
+    std::cout << "game::pushstate end" << std::endl;
 }
 
 bool Game::isRunning()
@@ -73,4 +75,9 @@ void Game::quit()
 sf::RenderWindow* Game::getWindow()
 {
     return &this->window;
+}
+
+UDPNetwork* Game::getNetwork()
+{
+    return &this->network;
 }

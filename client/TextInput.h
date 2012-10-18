@@ -11,7 +11,6 @@ public:
     TextInput(sf::Vector2f size, sf::Color color, int border_size);
     TextInput(const TextInput& orig);
     virtual ~TextInput();
-    std::string getName();
 protected:
     void Render(sf::RenderTarget& Target) const
     {

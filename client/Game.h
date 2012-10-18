@@ -12,6 +12,8 @@
 #include <vector>
 #include <iostream>
 
+#include "UDPNetwork.h"
+
 class GameState;
 
 class Game {
@@ -29,10 +31,13 @@ public:
     void handleEvents();
     void quit();
     sf::RenderWindow* getWindow();
+    UDPNetwork* getNetwork();
 private:
     std::vector<GameState*> states;
     sf::RenderWindow window;
     bool running;
+    
+    UDPNetwork network;
 };
 
 #endif	/* GAME_H */

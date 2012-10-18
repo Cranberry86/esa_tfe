@@ -18,8 +18,8 @@ using namespace std;
  */
 int main(int argc, char** argv) 
 {
-    UDPNetwork network;
-    network.launch();
+//    UDPNetwork network;
+//    network.launch();
     
     Game game;
     game.init(900,600,"TFE - Client");
@@ -30,6 +30,8 @@ int main(int argc, char** argv)
     while(game.isRunning())
     {
         game.handleEvents();
+        if(game.getNetwork()->isAwaitingAnswer())
+                game.getNetwork()->receiveData();
         game.draw();
     }
     return 0;

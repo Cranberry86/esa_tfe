@@ -7,25 +7,16 @@
 
 #include "LoginState.h"
 
-void LoginState::init()
-{    
-    TextInput input_login(sf::Vector2f(100,20), sf::Color::Green, 1, sf::Color::Magenta);
-    input_login.SetPosition(sf::Vector2f(100,150));
-    input_login.setName("login_input");
-    TextInput input_pwd(sf::Vector2f(100,20), sf::Color::Cyan, 1, sf::Color::Magenta);
-    input_pwd.SetPosition(sf::Vector2f(10,10));
-    input_pwd.setName("pwd_input");
+void LoginState::init(UDPNetwork* network)
+{
+    interface.addTextInput("login_input", sf::Vector2f(100,20), sf::Color::Green, 1, sf::Color::Magenta);
+    interface.getWidget("login_input")->SetPosition(sf::Vector2f(10,10));
+    interface.addButton("ok_button", sf::Vector2f(100,20), sf::Color::Red, 1, sf::Color::Black);
+    interface.getWidget("ok_button")->SetPosition(sf::Vector2f(100,150));
     
-    Button btn_ok(sf::Vector2f(100,20), sf::Color::Red, 1, sf::Color::Black);
-    btn_ok.SetPosition(200, 200);
-    btn_ok.setName("ok_button");
+    interface.addBackground("/home/cranberry/www/esa_tfe/client/images/bg2.jpg");
     
-    interface.addTextInput(input_login);
-    interface.addTextInput(input_pwd);
-    interface.addButton(btn_ok);
-    
-    BackgroundImage bg("/home/cranberry/www/esa_tfe/client/images/bg2.jpg");
-    interface.addBackground(bg);
+    this->network = network;
 }
 
 void LoginState::draw(sf::RenderWindow* window)
@@ -43,6 +34,14 @@ void LoginState::handleEvents(Game* game)
         {
             case sf::Event::Closed:
                 game->quit();
+                break;
+            case sf::Event::KeyPressed:
+                switch(event.Key.Code)
+                {
+                    case sf::Key::Up:
+                        this->network->sendData();
+                        break;
+                }
                 break;
             default:
                 break;

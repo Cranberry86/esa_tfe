@@ -23,8 +23,3 @@ TextInput::TextInput(sf::Vector2f size, sf::Color color, int border_size)
 TextInput::~TextInput()
 {
 }
-
-std::string TextInput::getName()
-{
-    return this->name;
-}
