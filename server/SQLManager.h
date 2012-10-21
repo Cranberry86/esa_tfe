@@ -20,6 +20,7 @@ public:
     std::map<std::string, std::string> getData(int id, std::string table);
     std::vector< std::map< std::string, std::string> > getAllData(std::string table);
     void close();
+    std::map<std::string, std::string> getDataWhere(std::map<std::string, std::string> where, std::string table);
 private:
     mysqlpp::Connection conn;
     MYSQL mysql;

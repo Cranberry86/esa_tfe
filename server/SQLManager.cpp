@@ -136,3 +136,56 @@ std::vector< std::map< std::string, std::string> > SQLManager::getAllData(std::s
 
     return results;
 }
+
+std::map<std::string, std::string> SQLManager::getDataWhere(std::map<std::string,std::string> where, std::string table)
+{
+    std::map<std::string, std::string> results;
+    
+    std::ostringstream sql_where;
+    
+    for(std::map<std::string, std::string>::iterator it = where.begin(); it != where.end(); ++it)
+    {
+        sql_where << " AND " << it->first << " = " << "'" << it->second << "'";
+    }
+    
+    // !! localhost doesn't work on linux, see fav
+    if (mysql_real_connect(&this->mysql, "127.0.0.1", "root", "mysql", "esa_tfe", 0, NULL, 0))
+    {
+        std::ostringstream query;
+        query << "SELECT * FROM " << table << " WHERE 1=1 " << sql_where.str() << " LIMIT 1";
+        std::cout << query.str() << std::endl;
+        mysql_query(&this->mysql, query.str().c_str());
+
+        MYSQL_RES *result = NULL;
+        MYSQL_ROW row;
+        MYSQL_FIELD *fields;
+        unsigned int num_champs = 0;
+
+        num_champs = mysql_field_count(&this->mysql);
+
+        result = mysql_use_result(&this->mysql);
+
+        fields = mysql_fetch_fields(result);
+
+        while ((row = mysql_fetch_row(result)))
+        {
+            unsigned long *lengths;
+
+            lengths = mysql_fetch_lengths(result);
+            for (int i = 0; i < num_champs; i++)
+            {
+                results[fields[i].name] = row[i];
+                //                std::cout << row[i] << std::endl;
+            }
+
+        }
+
+        mysql_free_result(result);
+    }
+    else
+    {
+        std::cout << "Une erreur s'est produite lors de la connexion à la BDD!";
+    }
+
+    return results;
+}
