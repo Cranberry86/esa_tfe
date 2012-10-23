@@ -28,11 +28,11 @@ void Interface::init()
 
 void Interface::displayWidgets(sf::RenderWindow* window)
 {
+    window->Draw(this->bg);
     for(std::map<std::string, Widget*>::iterator it = this->widgets.begin(); it != this->widgets.end(); ++it)
     {
         window->Draw(*it->second);
     }
-    window->Draw(this->bg);
 }
 
 void Interface::registerButton(Button& btn)
@@ -71,4 +71,32 @@ void Interface::addTextInput(std::string name, sf::Vector2f size, sf::Color back
 Widget* Interface::getWidget(std::string name)
 {
     return this->widgets[name];
+}
+
+void Interface::handleEvents(sf::Event& event)
+{
+    switch (event.Type)
+    {
+        case sf::Event::MouseButtonReleased:
+            switch (event.MouseButton.Button)
+            {
+                case sf::Mouse::Left:
+                    for(std::map<std::string, Widget*>::iterator it = this->widgets.begin(); it != this->widgets.end(); ++it)
+                    {
+                        if(it->second->isClickedOn(sf::Vector2f(event.MouseButton.X, event.MouseButton.Y)))
+                        {
+                            std::cout << "I'm clicked on !!" << std::endl;
+                            it->second->changeBorderColor(sf::Color::Red);
+                        }
+                        else
+                        {
+                            it->second->changeBorderColor();
+                        }
+                    }
+                    break;
+            }
+            break;
+        default:
+            break;
+    }
 }

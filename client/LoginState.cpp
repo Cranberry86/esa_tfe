@@ -9,12 +9,12 @@
 
 void LoginState::init(UDPNetwork* network)
 {
+     interface.addBackground("/home/cranberry/www/esa_tfe/client/images/bg2.jpg");
+     
     interface.addTextInput("login_input", sf::Vector2f(100,20), sf::Color::Green, 1, sf::Color::Magenta);
     interface.getWidget("login_input")->SetPosition(sf::Vector2f(10,10));
-    interface.addButton("ok_button", sf::Vector2f(100,20), sf::Color::Red, 1, sf::Color::Black);
+    interface.addButton("ok_button", sf::Vector2f(100,20), sf::Color::Blue, 1, sf::Color::Black);
     interface.getWidget("ok_button")->SetPosition(sf::Vector2f(100,150));
-    
-    interface.addBackground("/home/cranberry/www/esa_tfe/client/images/bg2.jpg");
     
     this->network = network;
 }
@@ -46,5 +46,6 @@ void LoginState::handleEvents(Game* game)
             default:
                 break;
         }
+        this->interface.handleEvents(event);
     }
 }

@@ -29,6 +29,7 @@ public:
     void addButton(std::string name, sf::Vector2f size, sf::Color back, int border_size, sf::Color border);
     void addTextInput(std::string name, sf::Vector2f size, sf::Color back, int border_size, sf::Color border);
     Widget* getWidget(std::string name);
+    void handleEvents(sf::Event& event);
 private:
     void registerButton(Button& btn);
     void registerTextInput(TextInput& ti);

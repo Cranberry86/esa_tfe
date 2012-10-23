@@ -14,6 +14,9 @@ public:
     virtual ~Widget();
     virtual void setName(const std::string& name);
     virtual std::string getName();
+    bool isClickedOn(sf::Vector2f point) const;
+    void changeBorderColor(sf::Color border_color);
+    void changeBorderColor();
 protected:
     std::string name;
     sf::Shape rect;
@@ -21,6 +24,9 @@ protected:
     {
         Target.Draw(this->rect);
     }
+    sf::Vector2f size;
+    sf::Color border_color;
+    sf::Color color;
 };
 
 #endif	/* WIDGET_H */
