@@ -10,8 +10,6 @@
 
 #include "GameState.h"
 #include "Interface.h"
-#include "ImageManager.h"
-#include "BackgroundImage.h"
 #include <iostream>
 
 
