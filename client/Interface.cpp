@@ -155,3 +155,10 @@ TextInput* Interface::getTextInput(std::string name)
 {
     return &this->textinputs[name];
 }
+
+void Interface::addAfter(std::string first, std::string next)
+{
+    TextInput* first_ti = &this->textinputs[first];
+    TextInput* next_ti = &this->textinputs[next];
+    next_ti->addAfter(first_ti);
+}

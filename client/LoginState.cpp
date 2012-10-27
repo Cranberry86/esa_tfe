@@ -16,6 +16,20 @@ void LoginState::init(UDPNetwork* network)
     interface.getTextInput("login_input")->setTextColor(sf::Color::Black);
     interface.getTextInput("login_input")->setTextSize(22);
     
+    interface.addTextInput("pwd_input", sf::Vector2f(200,0), sf::Vector2f(100,20), sf::Color::Yellow, 1, sf::Color::Yellow);
+    interface.getTextInput("pwd_input")->setMaxLength(14);
+    interface.getTextInput("pwd_input")->setTextColor(sf::Color::Black);
+    interface.getTextInput("pwd_input")->setTextSize(22);
+    
+    interface.addAfter("login_input", "pwd_input");
+    
+    interface.addTextInput("truc", sf::Vector2f(400,0), sf::Vector2f(100,20), sf::Color::Red, 1, sf::Color::Yellow);
+    interface.getTextInput("truc")->setMaxLength(14);
+    interface.getTextInput("truc")->setTextColor(sf::Color::Black);
+    interface.getTextInput("truc")->setTextSize(22);
+    
+    interface.addAfter("login_input", "truc");
+    
     interface.addButton("ok_button", sf::Vector2f(200,200), sf::Vector2f(100,20), sf::Color::Blue, 1, sf::Color::Black);
     interface.getWidget("ok_button")->setText("Login");
     interface.getWidget("ok_button")->setTextColor(sf::Color::Black);

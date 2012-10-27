@@ -13,10 +13,17 @@ public:
     void handleText(const sf::Uint32& chara);
     void setMaxLength(int max);
     void init();
+    void addAfter(TextInput* first);
+    TextInput* getNext();
+    TextInput* getFirst();
+    void setFirst(TextInput* first);
+    void setNext(TextInput* next);
 protected:
     void handleDrawText();
     int max_length;
     int current_length;
+    TextInput* next;
+    TextInput* first;
 };
 
 #endif	/* TEXTINPUT_H */
