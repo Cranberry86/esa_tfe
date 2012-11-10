@@ -10,6 +10,11 @@
 void LoginState::init(Game* game, UDPNetwork* network)
 {
     loading_screen = new LoadingState();
+    std::multimap<int, std::string> to_load;
+    to_load.insert(std::pair<int, std::string>(1, "/home/cranberry/www/esa_tfe/client/images/bg.jpg"));
+    to_load.insert(std::pair<int, std::string>(2, "/home/cranberry/www/esa_tfe/client/images/bg.jpg"));
+    to_load.insert(std::pair<int, std::string>(2, "/home/cranberry/www/esa_tfe/client/images/bg2.jpg"));
+    loading_screen->toLoad(to_load);
     game->pushShate(loading_screen);
         
     this->network = network;

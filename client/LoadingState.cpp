@@ -10,6 +10,7 @@
 void LoadingState::init(Game* game, UDPNetwork* network)
 {
     thread = new ThreadManager();
+    thread->toLoad(this->to_load);
     thread->Launch();
     this->game = game;
 }
@@ -41,4 +42,9 @@ void LoadingState::pause()
 void LoadingState::resume()
 {
     
+}
+
+void LoadingState::toLoad(std::multimap<int,std::string> to_load)
+{
+    this->to_load = to_load;
 }

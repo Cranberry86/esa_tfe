@@ -13,9 +13,11 @@ public:
     bool isRunning();
     void stop();
     void forceStop();
+    void toLoad(std::multimap<int, std::string> to_load);
 private:
     bool running;
     virtual void Run();
+    std::multimap<int, std::string> to_load;
 };
 
 #endif	/* THREADMANAGER_H */

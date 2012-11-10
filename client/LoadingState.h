@@ -19,9 +19,11 @@ public:
     void handleEvents(Game* game);
     void pause();
     void resume();
+    void toLoad(std::multimap<int, std::string> to_load);
 private:
     ThreadManager* thread;
     Game* game;
+    std::multimap<int, std::string> to_load;
 };
 
 #endif	/* LOADINGSTATE_H */
