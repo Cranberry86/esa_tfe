@@ -15,8 +15,10 @@
 class GameState {
 public:
     virtual void draw(sf::RenderWindow* window) = 0;
-    virtual void init(UDPNetwork* network) = 0;
+    virtual void init(Game* game, UDPNetwork* network) = 0;
     virtual void handleEvents(Game* game) = 0;
+    virtual void pause() = 0;
+    virtual void resume() = 0;
 private:
 
 };

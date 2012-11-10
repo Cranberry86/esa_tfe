@@ -33,19 +33,28 @@ void Game::init(int width, int height, std::string title)
 
 void Game::changeState(GameState* state)
 {
+    if(!this->states.empty())
+    {
+        this->states.pop_back();
+    }
     this->states.push_back(state);
+    this->states.back()->init(this, &this->network);
 }
 
 void Game::popState()
 {
     this->states.pop_back();
+    this->states.back()->resume();
+    std::cout << "game::popstate" << std::endl;
 }
 
 void Game::pushShate(GameState* state)
 {
     std::cout << "game::pushstate" << std::endl;
+    this->states.back()->pause();
+    std::cout << "gamestate::pause" << std::endl;
     this->states.push_back(state);
-    this->states.back()->init(&this->network);
+    this->states.back()->init(this, &this->network);
     std::cout << "game::pushstate end" << std::endl;
 }
 

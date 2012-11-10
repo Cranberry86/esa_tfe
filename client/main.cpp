@@ -25,7 +25,7 @@ int main(int argc, char** argv)
     game.init(800,600,"TFE - Client");
     
     LoginState login_state;
-    game.pushShate(&login_state);
+    game.changeState(&login_state);
     
     while(game.isRunning())
     {

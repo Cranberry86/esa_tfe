@@ -7,36 +7,11 @@
 
 #include "LoginState.h"
 
-void LoginState::init(UDPNetwork* network)
+void LoginState::init(Game* game, UDPNetwork* network)
 {
-     interface.addBackground("/home/cranberry/www/esa_tfe/client/images/bg.jpg");
-     
-    interface.addTextInput("login_input", sf::Vector2f(50,0), sf::Vector2f(100,20), sf::Color::Green, 1, sf::Color::Yellow);
-    interface.getTextInput("login_input")->setMaxLength(14);
-    interface.getTextInput("login_input")->setTextColor(sf::Color::Black);
-    interface.getTextInput("login_input")->setTextSize(22);
-    
-    interface.addTextInput("pwd_input", sf::Vector2f(200,0), sf::Vector2f(100,20), sf::Color::Yellow, 1, sf::Color::Yellow);
-    interface.getTextInput("pwd_input")->setMaxLength(14);
-    interface.getTextInput("pwd_input")->setTextColor(sf::Color::Black);
-    interface.getTextInput("pwd_input")->setTextSize(22);
-    
-    interface.addAfter("login_input", "pwd_input");
-    
-    interface.addTextInput("truc", sf::Vector2f(400,0), sf::Vector2f(100,20), sf::Color::Red, 1, sf::Color::Yellow);
-    interface.getTextInput("truc")->setMaxLength(14);
-    interface.getTextInput("truc")->setTextColor(sf::Color::Black);
-    interface.getTextInput("truc")->setTextSize(22);
-    
-    interface.addAfter("login_input", "truc");
-    
-    interface.addButton("ok_button", sf::Vector2f(200,200), sf::Vector2f(100,20), sf::Color::Blue, 1, sf::Color::Black);
-    interface.getWidget("ok_button")->setText("Login");
-    interface.getWidget("ok_button")->setTextColor(sf::Color::Black);
-    interface.getWidget("ok_button")->setTextSize(22);
+    loading_screen = new LoadingState();
+    game->pushShate(loading_screen);
         
-    interface.addLabel("label_login", "Username :", 50, sf::Color::Black, sf::Vector2f(0,300));
-    
     this->network = network;
 }
 
@@ -69,4 +44,40 @@ void LoginState::handleEvents(Game* game)
         }
         this->interface.handleEvents(event);
     }
+}
+
+void LoginState::pause()
+{
+}
+
+void LoginState::resume()
+{
+    // TODO : USE THE IMAGE MANAGERS
+    interface.addBackground("/home/cranberry/www/esa_tfe/client/images/bg.jpg");
+     
+    interface.addTextInput("login_input", sf::Vector2f(50,0), sf::Vector2f(100,20), sf::Color::Green, 1, sf::Color::Yellow);
+    interface.getTextInput("login_input")->setMaxLength(14);
+    interface.getTextInput("login_input")->setTextColor(sf::Color::Black);
+    interface.getTextInput("login_input")->setTextSize(22);
+    
+    interface.addTextInput("pwd_input", sf::Vector2f(200,0), sf::Vector2f(100,20), sf::Color::Yellow, 1, sf::Color::Yellow);
+    interface.getTextInput("pwd_input")->setMaxLength(14);
+    interface.getTextInput("pwd_input")->setTextColor(sf::Color::Black);
+    interface.getTextInput("pwd_input")->setTextSize(22);
+    
+    interface.addAfter("login_input", "pwd_input");
+    
+    interface.addTextInput("truc", sf::Vector2f(400,0), sf::Vector2f(100,20), sf::Color::Red, 1, sf::Color::Yellow);
+    interface.getTextInput("truc")->setMaxLength(14);
+    interface.getTextInput("truc")->setTextColor(sf::Color::Black);
+    interface.getTextInput("truc")->setTextSize(22);
+    
+    interface.addAfter("login_input", "truc");
+    
+    interface.addButton("ok_button", sf::Vector2f(200,200), sf::Vector2f(100,20), sf::Color::Blue, 1, sf::Color::Black);
+    interface.getWidget("ok_button")->setText("Login");
+    interface.getWidget("ok_button")->setTextColor(sf::Color::Black);
+    interface.getWidget("ok_button")->setTextSize(22);
+        
+    interface.addLabel("label_login", "Username :", 50, sf::Color::Black, sf::Vector2f(0,300));
 }
