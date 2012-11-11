@@ -34,6 +34,8 @@ public:
     void handleEvents(sf::Event& event);
     void addLabel(std::string name, std::string text, int text_size, sf::Color text_color, sf::Vector2f position);
     void addAfter(std::string first, std::string next);
+    
+    void SetImageManager(ImageManager* imanager);
 private:
     void registerButton(Button& btn);
     void registerTextInput(TextInput& ti);
@@ -47,6 +49,8 @@ private:
     
     std::map<std::string, Widget*> widgets;
     TextInput* getFocusTextInput();
+    
+    ImageManager* imanager;
 };
 
 #endif	/* INTERFACE_H */

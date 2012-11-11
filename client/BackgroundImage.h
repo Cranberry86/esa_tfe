@@ -18,6 +18,7 @@ class BackgroundImage : public sf::Sprite {
 public:
     BackgroundImage();
     BackgroundImage(const std::string& filename);
+    BackgroundImage(ImageManager* imanager, const std::string& filename);
     BackgroundImage(const BackgroundImage& orig);
     virtual ~BackgroundImage();
     void setSpriteFromImage();

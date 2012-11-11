@@ -28,6 +28,12 @@ BackgroundImage::BackgroundImage(const std::string& filename)
     this->SetImage(image);
 }
 
+BackgroundImage::BackgroundImage(ImageManager* imanager, const std::string& filename)
+{
+    this->image = imanager->getImage(filename);
+    this->SetImage(image);
+}
+
 void BackgroundImage::setSpriteFromImage()
 {
     this->SetImage(image);

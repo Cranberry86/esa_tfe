@@ -9,6 +9,8 @@
 
 void LoginState::init(Game* game, UDPNetwork* network)
 {
+    interface.SetImageManager(game->getImageManager());
+    
     loading_screen = new LoadingState();
     std::multimap<int, std::string> to_load;
     to_load.insert(std::pair<int, std::string>(1, "/home/cranberry/www/esa_tfe/client/images/bg.jpg"));

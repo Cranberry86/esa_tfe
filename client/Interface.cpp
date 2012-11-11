@@ -58,7 +58,7 @@ void Interface::registerLabel(Label& label)
 
 void Interface::addBackground(std::string filename)
 {
-    BackgroundImage bg(filename);
+    BackgroundImage bg(imanager, filename);
     this->bg = bg;
     this->bg.setSpriteFromImage();
 }
@@ -161,4 +161,9 @@ void Interface::addAfter(std::string first, std::string next)
     TextInput* first_ti = &this->textinputs[first];
     TextInput* next_ti = &this->textinputs[next];
     next_ti->addAfter(first_ti);
+}
+
+void Interface::SetImageManager(ImageManager* imanager)
+{
+    this->imanager = imanager;
 }
