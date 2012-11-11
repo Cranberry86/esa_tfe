@@ -90,3 +90,8 @@ UDPNetwork* Game::getNetwork()
 {
     return &this->network;
 }
+
+ImageManager* Game::getImageManager()
+{
+    return &this->imanager;
+}

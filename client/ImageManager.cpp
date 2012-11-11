@@ -23,13 +23,21 @@ ImageManager::~ImageManager()
 
 bool ImageManager::loadImage(const std::string& filename)
 {
-    sf::Image image;
-    if(!image.LoadFromFile(filename))
+    std::map<std::string, sf::Image>::const_iterator it;
+    it = this->images.find(filename);
+    
+    if(it == this->images.end())
     {
-        std::cout << "im::getimage ERROR" << std::endl;
-        return false;
+        
+        sf::Image image;
+        if(!image.LoadFromFile(filename))
+        {
+            std::cout << "im::getimage ERROR" << std::endl;
+            return false;
+        }
+        this->images[filename] = image;
     }
-    this->images[filename] = image;
+    return true;
 }
 
 sf::Image& ImageManager::getImage(const std::string& filename)

@@ -9,7 +9,7 @@
 
 void LoadingState::init(Game* game, UDPNetwork* network)
 {
-    thread = new ThreadManager();
+    thread = new ThreadManager(game);
     thread->toLoad(this->to_load);
     thread->Launch();
     this->game = game;

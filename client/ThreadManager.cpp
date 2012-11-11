@@ -8,6 +8,11 @@ ThreadManager::ThreadManager()
 {
 }
 
+ThreadManager::ThreadManager(Game* game)
+{
+    this->game = game;
+}
+
 ThreadManager::ThreadManager(const ThreadManager& orig)
 {
 }
@@ -25,25 +30,17 @@ void ThreadManager::Run()
 {
     running = true;
     
+//    sf::Context context;
+//    context.SetActive(true);
+    
     for(std::multimap<int, std::string>::iterator it = this->to_load.begin(); it != this->to_load.end(); ++it)
     {
-        std::cout << "element" << std::endl;
         if(it->first == 1) // image
         {
-            std::cout << "image" << std::endl;
-            sf::Image img;
-            if(!img.LoadFromFile(it->second))
-            {
-                std::cout << "ERROR LOADING IMAGE" << std::endl;
-            }
-            else
-            {
-                std::cout << "OK LOADING IMAGE" << std::endl;
-            }
+            game->getImageManager()->loadImage(it->second);
         }
         else if(it->first == 2) // son
         {
-            std::cout << "son" << std::endl;
             sf::SoundBuffer Buffer;
             // only to have a high loading time
             if (!Buffer.LoadFromFile("/home/cranberry/www/esa_tfe/client/musics/1.flac"))
@@ -56,8 +53,6 @@ void ThreadManager::Run()
             }
         }
     }
-    
-    std::cout << "after for" << std::endl;
     
     running = false;
 }

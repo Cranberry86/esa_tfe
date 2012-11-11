@@ -13,6 +13,7 @@
 #include <iostream>
 
 #include "UDPNetwork.h"
+#include "ImageManager.h"
 
 class GameState;
 
@@ -32,12 +33,14 @@ public:
     void quit();
     sf::RenderWindow* getWindow();
     UDPNetwork* getNetwork();
+    ImageManager* getImageManager();
 private:
     std::vector<GameState*> states;
     sf::RenderWindow window;
     bool running;
     
     UDPNetwork network;
+    ImageManager imanager;
 };
 
 #endif	/* GAME_H */
