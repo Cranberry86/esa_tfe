@@ -11,16 +11,18 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 
+#include "Frame.h"
+
 class Animation {
 public:
     Animation();
     Animation(const Animation& orig);
     virtual ~Animation();
-    void pushFrame(sf::Image& img, sf::IntRect rect);
-    sf::IntRect& getFrame(int frame);
+    void pushFrame(sf::Image& img, sf::IntRect rect, sf::Color color = sf::Color::White);
+    Frame& getFrame(int frame);
     int getFramesSize();
 private:
-    std::vector<sf::IntRect> frames;
+    std::vector<Frame> frames;
 };
 
 #endif	/* ANIMATION_H */

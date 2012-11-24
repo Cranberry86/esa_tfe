@@ -19,12 +19,13 @@ Animation::~Animation()
 {
 }
 
-void Animation::pushFrame(sf::Image& img, sf::IntRect rect)
+void Animation::pushFrame(sf::Image& img, sf::IntRect rect, sf::Color color)
 {
-    this->frames.push_back(rect);
+    Frame frame(&img, rect, color);
+    this->frames.push_back(frame);
 }
 
-sf::IntRect& Animation::getFrame(int frame)
+Frame& Animation::getFrame(int frame)
 {
     return this->frames[frame];
 }

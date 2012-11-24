@@ -5,6 +5,8 @@
  * Created on 24 novembre 2012, 15:03
  */
 
+#include <iostream>
+
 #include "AnimatedSprite.h"
 
 AnimatedSprite::AnimatedSprite()
@@ -71,7 +73,11 @@ void AnimatedSprite::setFrame(int frame)
     {
         if(frame < this->animation->getFramesSize())
         {
-            this->SetSubRect(this->animation->getFrame(frame));
+            if(this->animation->getFrame(frame).getImage() != NULL)
+            {
+                this->SetImage(*this->animation->getFrame(frame).getImage());
+            }
+            this->SetSubRect(this->animation->getFrame(frame).getRect());
         }
     }
 }
