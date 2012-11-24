@@ -10,6 +10,8 @@
 
 #include "GameState.h"
 #include "ThreadManager.h"
+#include "Animation.h"
+#include "AnimatedSprite.h"
 
 
 class LoadingState : public GameState {
@@ -24,6 +26,8 @@ private:
     ThreadManager* thread;
     Game* game;
     std::multimap<int, std::string> to_load;
+    Animation* animation;
+    AnimatedSprite* sprite;
 };
 
 #endif	/* LOADINGSTATE_H */

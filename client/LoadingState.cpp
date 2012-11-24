@@ -13,6 +13,25 @@ void LoadingState::init(Game* game, UDPNetwork* network)
     thread->toLoad(this->to_load);
     thread->Launch();
     this->game = game;
+    
+    this->sprite = new AnimatedSprite(0.1f);
+    this->animation = new Animation();
+    sf::Image& img = this->game->getImageManager()->getImage("/home/cranberry/www/esa_tfe/client/images/spritesheet.png");
+    img.SetSmooth(false);
+    this->animation->pushFrame(img, sf::IntRect(40,0,60,28));
+    this->animation->pushFrame(img, sf::IntRect(60,0,80,28));
+    this->animation->pushFrame(img, sf::IntRect(80,0,100,28));
+    this->animation->pushFrame(img, sf::IntRect(100,0,120,28));
+    this->animation->pushFrame(img, sf::IntRect(120,0,140,28));
+    this->animation->pushFrame(img, sf::IntRect(140,0,160,28));
+    this->animation->pushFrame(img, sf::IntRect(160,0,180,28));
+    this->animation->pushFrame(img, sf::IntRect(180,0,200,28));
+    this->animation->pushFrame(img, sf::IntRect(200,0,220,28));
+    this->sprite->setAnimation(this->animation);
+    this->sprite->setFrameTime(0.1f);
+    this->sprite->SetPosition(100, 100);
+    this->sprite->SetImage(img);
+    // todo : delete them !
 }
 
 void LoadingState::draw(sf::RenderWindow* window)
@@ -23,6 +42,8 @@ void LoadingState::draw(sf::RenderWindow* window)
     s.SetColor(sf::Color::Black);
     s.SetFont(sf::Font::GetDefaultFont());
     window->Draw(s);
+    this->sprite->play(window->GetFrameTime());
+    window->Draw(*this->sprite);
     
     if(!thread->isRunning())
     {
