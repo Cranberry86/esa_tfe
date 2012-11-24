@@ -85,6 +85,8 @@ void LoginState::resume()
     interface.getWidget("ok_button")->setText("Login");
     interface.getWidget("ok_button")->setTextColor(sf::Color::Black);
     interface.getWidget("ok_button")->setTextSize(22);
+    
+    interface.addRoundedBackground("bg_inputs", sf::Vector2f(10,10), sf::Vector2f(500,500), 10, 10, sf::Color(0, 255, 255, 128), 1, sf::Color::Black);
         
     interface.addLabel("label_login", "Username :", 50, sf::Color::Black, sf::Vector2f(0,300));
 }

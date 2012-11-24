@@ -56,6 +56,13 @@ void Interface::registerLabel(Label& label)
     this->widgets[label.getName()] = &this->labels[label.getName()];
 }
 
+void Interface::registerRoundedBackground(RoundedBackground& rb)
+{
+    this->rbs[rb.getName()] = rb;
+    this->rbs[rb.getName()].init();
+    this->widgets[rb.getName()] = &this->rbs[rb.getName()];
+}
+
 void Interface::addBackground(std::string filename)
 {
     BackgroundImage bg(imanager, filename);
@@ -82,6 +89,13 @@ void Interface::addLabel(std::string name, std::string text, int text_size, sf::
     Label label(text, text_size, text_color, position);
     label.setName(name);
     registerLabel(label);
+}
+
+void Interface::addRoundedBackground(std::string name, sf::Vector2f position, sf::Vector2f size, float radius, unsigned int points, sf::Color color, int border_size, sf::Color border_color)
+{
+    RoundedBackground rb(position, size, radius, points, color, border_size, border_color);
+    rb.setName(name);
+    registerRoundedBackground(rb);
 }
 
 Widget* Interface::getWidget(std::string name)

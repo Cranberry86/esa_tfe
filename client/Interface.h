@@ -13,6 +13,7 @@
 #include "Button.h"
 #include "TextInput.h"
 #include "Label.h"
+#include "RoundedBackground.h"
 #include <iostream>
 #include <map>
 
@@ -34,18 +35,21 @@ public:
     void handleEvents(sf::Event& event);
     void addLabel(std::string name, std::string text, int text_size, sf::Color text_color, sf::Vector2f position);
     void addAfter(std::string first, std::string next);
+    void addRoundedBackground(std::string name, sf::Vector2f position, sf::Vector2f size, float radius, unsigned int points, sf::Color color, int border_size, sf::Color border_color);
     
     void SetImageManager(ImageManager* imanager);
 private:
     void registerButton(Button& btn);
     void registerTextInput(TextInput& ti);
     void registerLabel(Label& label);
+    void registerRoundedBackground(RoundedBackground& rb);
     
     BackgroundImage bg;
     std::map<std::string, TextInput> textinputs;
     std::map<std::string, Button> buttons;
     std::map<std::string, BackgroundImage> backgrounds;
     std::map<std::string, Label> labels;
+    std::map<std::string, RoundedBackground> rbs;
     
     std::map<std::string, Widget*> widgets;
     TextInput* getFocusTextInput();
