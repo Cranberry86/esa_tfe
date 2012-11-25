@@ -15,6 +15,7 @@ Widget::Widget(sf::Vector2f position, sf::Vector2f size, sf::Color color, int bo
     this->border_size = border_size;
     this->focus = false;
     this->position = position;
+    this->visible = true;
 }
 
 Widget::Widget(const Widget& orig)
@@ -108,4 +109,19 @@ void Widget::init()
     this->draw_text.SetFont(this->font);
     this->draw_text.SetColor(this->text_color);
     this->rect.SetPosition(this->position);
+}
+
+std::string Widget::getText()
+{
+    return this->input_text;
+}
+
+void Widget::setVisible(bool visible)
+{
+    this->visible = visible;
+}
+
+bool Widget::getVisible()
+{
+    return this->visible;
 }

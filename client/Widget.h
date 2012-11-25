@@ -24,6 +24,9 @@ public:
     void setText(std::string text);
     
     void init();
+    std::string getText();
+    void setVisible(bool visible);
+    bool getVisible();
 protected:
     std::string name;
     sf::Shape rect;
@@ -43,6 +46,7 @@ protected:
     int text_size;
     sf::Color text_color;
     std::string input_text;
+    bool visible;
 };
 
 #endif	/* WIDGET_H */

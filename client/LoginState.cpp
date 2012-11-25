@@ -9,7 +9,8 @@
 
 void LoginState::init(Game* game, UDPNetwork* network)
 {
-    interface.SetImageManager(game->getImageManager());
+    interface.setImageManager(game->getImageManager());
+    interface.setNetwork(network);
     
     loading_screen = new LoadingState();
     std::multimap<int, std::string> to_load;
@@ -42,7 +43,7 @@ void LoginState::handleEvents(Game* game)
                 switch(event.Key.Code)
                 {
                     case sf::Key::Up:
-                        this->network->sendData();
+//                        this->network->sendData();
                         break;
                 }
                 break;
@@ -74,12 +75,12 @@ void LoginState::resume()
     
     interface.addAfter("login_input", "pwd_input");
     
-    interface.addTextInput("truc", sf::Vector2f(400,0), sf::Vector2f(100,20), sf::Color::Red, 1, sf::Color::Yellow);
-    interface.getTextInput("truc")->setMaxLength(14);
-    interface.getTextInput("truc")->setTextColor(sf::Color::Black);
-    interface.getTextInput("truc")->setTextSize(22);
-    
-    interface.addAfter("login_input", "truc");
+//    interface.addTextInput("truc", sf::Vector2f(400,0), sf::Vector2f(100,20), sf::Color::Red, 1, sf::Color::Yellow);
+//    interface.getTextInput("truc")->setMaxLength(14);
+//    interface.getTextInput("truc")->setTextColor(sf::Color::Black);
+//    interface.getTextInput("truc")->setTextSize(22);
+//    
+//    interface.addAfter("login_input", "truc");
     
     interface.addButton("ok_button", sf::Vector2f(200,200), sf::Vector2f(100,20), sf::Color::Blue, 1, sf::Color::Black);
     interface.getWidget("ok_button")->setText("Login");
@@ -89,4 +90,7 @@ void LoginState::resume()
     interface.addRoundedBackground("bg_inputs", sf::Vector2f(10,10), sf::Vector2f(500,500), 10, 10, sf::Color(0, 255, 255, 128), 1, sf::Color::Black);
         
     interface.addLabel("label_login", "Username :", 50, sf::Color::Black, sf::Vector2f(0,300));
+    
+    interface.addLabel("label_error", "Username or password incorrect", 50, sf::Color::White, sf::Vector2f(10,50));
+    interface.getWidget("label_error")->setVisible(false);
 }

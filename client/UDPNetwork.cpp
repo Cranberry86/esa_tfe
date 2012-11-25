@@ -54,14 +54,14 @@ void UDPNetwork::launch()
     }
 }
 
-void UDPNetwork::sendData()
+void UDPNetwork::sendData(sf::Packet packet)
 {
-    sf::Packet packet;
-    std::string login = "Cranberry";
-    std::string pwd = "password";
-    sf::Int8 packet_type = 1;
-    
-    packet << packet_type << login << pwd;
+//    sf::Packet packet;
+//    std::string login = "Cranberry";
+//    std::string pwd = "password";
+//    sf::Int8 packet_type = 1;
+//    
+//    packet << packet_type << login << pwd;
     
     if (this->socket.Send(packet, this->server_address, 4343) != sf::Socket::Done)
         return;

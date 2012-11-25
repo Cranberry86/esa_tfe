@@ -8,6 +8,7 @@
 #include <vector>
 
 #include "Interface.h"
+#include "Action.h"
 
 Interface::Interface()
 {
@@ -31,7 +32,8 @@ void Interface::displayWidgets(sf::RenderWindow* window)
     window->Draw(this->bg);
     for (std::map<std::string, Widget*>::iterator it = this->widgets.begin(); it != this->widgets.end(); ++it)
     {
-        window->Draw(*it->second);
+        if(it->second->getVisible())
+            window->Draw(*it->second);
     }
 }
 
@@ -113,6 +115,7 @@ void Interface::handleEvents(sf::Event& event)
                 if (it->second.isClickedOn(sf::Vector2f(event.MouseMove.X, event.MouseMove.Y)))
                 {
                     it->second.changeBorderColor(sf::Color::Red);
+                    break;
                 }
                 else
                 {
@@ -128,10 +131,27 @@ void Interface::handleEvents(sf::Event& event)
                         if (it->second.isClickedOn(sf::Vector2f(event.MouseButton.X, event.MouseButton.Y)))
                         {
                             it->second.changeBorderColor(sf::Color::Red);
+                            break;
                         }
                         else
                         {
                             it->second.changeBorderColor();
+                        }
+                    }
+                    for (std::map<std::string, Button>::iterator it = this->buttons.begin(); it != this->buttons.end(); ++it)
+                    {
+                        if (it->second.isClickedOn(sf::Vector2f(event.MouseButton.X, event.MouseButton.Y)))
+                        {
+                            if(this->getTextInput("login_input")->getText() != "" && this->getTextInput("pwd_input")->getText() != "")
+                            {
+                                this->getWidget("label_error")->setVisible(false);
+                                Action::login(this->network, this->getTextInput("login_input")->getText(), this->getTextInput("pwd_input")->getText());
+                            }
+                            else
+                            {
+                                this->getWidget("label_error")->setVisible(true);
+                            }
+                            break;
                         }
                     }
                     break;
@@ -177,7 +197,12 @@ void Interface::addAfter(std::string first, std::string next)
     next_ti->addAfter(first_ti);
 }
 
-void Interface::SetImageManager(ImageManager* imanager)
+void Interface::setImageManager(ImageManager* imanager)
 {
     this->imanager = imanager;
+}
+
+void Interface::setNetwork(UDPNetwork* network)
+{
+    this->network = network;
 }

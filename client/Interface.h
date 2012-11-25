@@ -14,6 +14,7 @@
 #include "TextInput.h"
 #include "Label.h"
 #include "RoundedBackground.h"
+#include "UDPNetwork.h"
 #include <iostream>
 #include <map>
 
@@ -37,7 +38,8 @@ public:
     void addAfter(std::string first, std::string next);
     void addRoundedBackground(std::string name, sf::Vector2f position, sf::Vector2f size, float radius, unsigned int points, sf::Color color, int border_size, sf::Color border_color);
     
-    void SetImageManager(ImageManager* imanager);
+    void setImageManager(ImageManager* imanager);
+    void setNetwork(UDPNetwork* network);
 private:
     void registerButton(Button& btn);
     void registerTextInput(TextInput& ti);
@@ -55,6 +57,7 @@ private:
     TextInput* getFocusTextInput();
     
     ImageManager* imanager;
+    UDPNetwork* network;
 };
 
 #endif	/* INTERFACE_H */

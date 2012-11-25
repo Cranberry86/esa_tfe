@@ -9,7 +9,7 @@ public:
     UDPNetwork();
     UDPNetwork(const UDPNetwork& orig);
     virtual ~UDPNetwork();
-    void sendData();
+    void sendData(sf::Packet packet);
     void receiveData();
     void launch();
     bool isAwaitingAnswer();
