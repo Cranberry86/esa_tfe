@@ -67,3 +67,8 @@ void LoadingState::toLoad(std::multimap<int,std::string> to_load)
 {
     this->to_load = to_load;
 }
+
+void LoadingState::update(Game* game)
+{
+    
+}

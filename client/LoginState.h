@@ -11,6 +11,7 @@
 #include "GameState.h"
 #include "Interface.h"
 #include "LoadingState.h"
+#include "ButtonObserver.h"
 #include <iostream>
 
 
@@ -21,11 +22,13 @@ public:
     void handleEvents(Game* game);
     void pause();
     void resume();
+    void update(Game* game);
 private:
     Interface interface;
     sf::RenderWindow* window;
     UDPNetwork* network;
     LoadingState* loading_screen;
+    ButtonObserver* observer;
 };
 
 #endif	/* LOGINSTATE_H */

@@ -22,6 +22,7 @@ public:
     void pause();
     void resume();
     void toLoad(std::multimap<int, std::string> to_load);
+    void update(Game* game);
 private:
     ThreadManager* thread;
     Game* game;

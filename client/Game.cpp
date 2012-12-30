@@ -95,3 +95,8 @@ ImageManager* Game::getImageManager()
 {
     return &this->imanager;
 }
+
+void Game::update()
+{
+    this->states.back()->update(this);
+}

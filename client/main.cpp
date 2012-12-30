@@ -32,6 +32,7 @@ int main(int argc, char** argv)
         game.handleEvents();
         if(game.getNetwork()->isAwaitingAnswer())
                 game.getNetwork()->receiveData();
+        game.update();
         game.draw();
     }
     return 0;

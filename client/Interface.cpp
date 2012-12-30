@@ -145,7 +145,8 @@ void Interface::handleEvents(sf::Event& event)
                             if(this->getTextInput("login_input")->getText() != "" && this->getTextInput("pwd_input")->getText() != "")
                             {
                                 this->getWidget("label_error")->setVisible(false);
-                                Action::login(this->network, this->getTextInput("login_input")->getText(), this->getTextInput("pwd_input")->getText());
+                                //Action::login(this->network, this->getTextInput("login_input")->getText(), this->getTextInput("pwd_input")->getText());
+                                it->second.NotifyObservers();
                             }
                             else
                             {
@@ -188,6 +189,11 @@ TextInput* Interface::getFocusTextInput()
 TextInput* Interface::getTextInput(std::string name)
 {
     return &this->textinputs[name];
+}
+
+Button* Interface::getButton(std::string name)
+{
+    return &this->buttons[name];
 }
 
 void Interface::addAfter(std::string first, std::string next)

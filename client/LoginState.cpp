@@ -21,6 +21,7 @@ void LoginState::init(Game* game, UDPNetwork* network)
     game->pushShate(loading_screen);
         
     this->network = network;
+    this->observer = new ButtonObserver();
 }
 
 void LoginState::draw(sf::RenderWindow* window)
@@ -86,6 +87,7 @@ void LoginState::resume()
     interface.getWidget("ok_button")->setText("Login");
     interface.getWidget("ok_button")->setTextColor(sf::Color::Black);
     interface.getWidget("ok_button")->setTextSize(22);
+    interface.getButton("ok_button")->AddObserver(this->observer);
     
     interface.addRoundedBackground("bg_inputs", sf::Vector2f(10,10), sf::Vector2f(500,500), 10, 10, sf::Color(0, 255, 255, 128), 1, sf::Color::Black);
         
@@ -93,4 +95,12 @@ void LoginState::resume()
     
     interface.addLabel("label_error", "Username or password incorrect", 50, sf::Color::White, sf::Vector2f(10,50));
     interface.getWidget("label_error")->setVisible(false);
+}
+
+void LoginState::update(Game* game)
+{
+    if(this->observer->getButtonName() == "ok_button")
+    {
+        std::cout << "greeeeuh euhe euh" << std::endl;
+    }
 }

@@ -31,6 +31,7 @@ public:
     void draw();
     void handleEvents();
     void quit();
+    void update();
     sf::RenderWindow* getWindow();
     UDPNetwork* getNetwork();
     ImageManager* getImageManager();

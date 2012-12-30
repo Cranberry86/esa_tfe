@@ -19,6 +19,7 @@ public:
     virtual void handleEvents(Game* game) = 0;
     virtual void pause() = 0;
     virtual void resume() = 0;
+    virtual void update(Game* game) = 0;
 private:
 
 };

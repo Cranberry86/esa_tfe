@@ -33,6 +33,7 @@ public:
     void addTextInput(std::string name, sf::Vector2f position, sf::Vector2f size, sf::Color bg_color, int border_size, sf::Color border);
     Widget* getWidget(std::string name);
     TextInput* getTextInput(std::string name);
+    Button* getButton(std::string name);
     void handleEvents(sf::Event& event);
     void addLabel(std::string name, std::string text, int text_size, sf::Color text_color, sf::Vector2f position);
     void addAfter(std::string first, std::string next);
